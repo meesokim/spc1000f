@@ -1,0 +1,5 @@
+Acorn Atom implementation for the Ice40 (myStorm BlackIce)
+https://github.com/hoglet67/Ice40Atom/blob/master/src/mc6847.v
+Under GNU GPL license.
+
+Modified by xuodor, 2025-10-16: extended to fetch external char pattern data

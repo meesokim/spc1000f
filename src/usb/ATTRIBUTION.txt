@@ -1,0 +1,3 @@
+Compact USB HID host FPGA core
+https://github.com/nand2mario/usb_hid_host
+Under Apache-2.0 license.

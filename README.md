@@ -1,2 +1,30 @@
-# spc1000f
-FPGA implementation SPC-1000
+# SPC-1000F
+SPC-1000F is a near-complete FPGA implementation of [SPC-1000](https://en.wikipedia.org/wiki/SPC-1000), 8-bit computer popular in South Korea back in 80's. 
+
+![SPC-1000 on FPGA](spc1000f.jpg)
+
+* Dev board: Alinx AX309 (Spartan 6, XC6SLX16)
+  * Available on [AliExpress](https://www.aliexpress.com/w/wholesale-ax309-fpga.html?spm=a2g0o.home.search.0)
+  * Resources (specs/docs, Verilog examples) on [Github](https://github.com/alinxalinx/AX309)
+* Open-sourced modules (all the credits go to the authors) adopted in the project are:
+  * Z80 - https://github.com/gdevic/A-Z80 
+  * MC6847 - https://github.com/hoglet67/Ice40Atom/blob/master/src/mc6847.v 
+  * USB HID Host (for keyboard) - https://github.com/nand2mario/usb_hid_host
+  * Support for sound chip (Yamaha AY-3-8910), and tape load/save functionality are in plan. 
+
+
+## How to use it
+ * Use the .mcs PROM file in the repo. Follow the guideline ["Programming SPI Flash"](https://docs.amd.com/r/en-US/xapp586-spi-flash/Programming-the-SPI-Flash-In-System)
+ * The board will reboot to the initial screen once the flashing is done.
+ * If you want to build it from source, import the project, and follow [the instruction](https://dejazzer.com/ee478/labs/lab2_ise_tutorial.pdf) (from section 3.4 "Add Existing Source Files to Project"). 
+
+## Connecting a keyboard
+   The board does not come with USB or PS/2 connector. I chose to use a simple USB A female receptacle + 15K resistors x 2 as instructed in [usb-hid-host[(https://github.com/nand2mario/usb_hid_host/blob/main/doc/usb_hid_host.md) project.
+
+## TODO
+ * Fix bugs (plenty of them alive...)
+ * Tape loading/saving 
+ * Add sound chip (AY-3-8910)
+ * Support more boards (Tang Nano 9K, IceSugar are planned)
+ * Upgrade USB HID host from low- to full-speed one
+ * Scanline effect
