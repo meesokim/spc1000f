@@ -27,6 +27,7 @@ endmodule // ram_sync
 module vram (
                 // Port A (CPU)
                 input            clk_a,
+                input            sel_a,
                 input            we_a,
                 input [10:0]     addr_a,
                 input [7:0]      din_a,
@@ -37,14 +38,16 @@ module vram (
             );
 
    reg [7:0]                     ram [0:2047];
+   wire [10:0]                   addr = sel_a ? addr_a : addr_b;
+   wire [7:0]                    dout = ram[addr];
    
    always @(posedge clk_a)
      begin
         if (we_a)
-          ram[addr_a] <= din_a;
+          ram[addr] <= din_a;
      end
 
-   assign dout_a = !we_a ? ram[addr_a] : 8'bz;
-   assign dout_b = addr_a == addr_b ? din_a : ram[addr_b];
+   assign dout_a = !we_a ? dout : 8'bz;
+   assign dout_b = (sel_a && we_a) ? din_a : dout;
    
 endmodule

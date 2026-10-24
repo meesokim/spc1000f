@@ -212,6 +212,7 @@ module top (
                 .dout(packed_char_d));
 
     vram        vram_tg(.clk_a(clk_cpu),
+                        .sel_a(vram_en && vc_id == TG),
                         .we_a(tg_wen),
                         .addr_a(vc_addr_tg),
                         .din_a(vc_din_tg),
@@ -220,6 +221,7 @@ module top (
                         .dout_b(vg_data_tg));
 
     vram        vram_ag(.clk_a(clk_cpu),
+                        .sel_a(vram_en && vc_id == AG),
                         .we_a(ag_wen),
                         .addr_a(vc_addr_ag),
                         .din_a(vc_din_ag),
@@ -228,6 +230,7 @@ module top (
                         .dout_b(vg_data_ag));
 
     vram        vram_cg(.clk_a(clk_cpu),
+                        .sel_a(vram_en && vc_id == CG),
                         .we_a(cg_wen),
                         .addr_a(vc_addr_cg),
                         .din_a(vc_din_cg),

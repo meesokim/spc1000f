@@ -4,7 +4,7 @@ run
 -ifn spc1000f.prj
 -ofn top
 -ofmt NGC
--p xc6slx16-ftg256-2
+-p xc6slx9-tqg144-2
 -top top
 -opt_mode Speed
 -opt_level 1

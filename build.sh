@@ -1,14 +1,34 @@
 #!/bin/bash
 set -e
 
-# Target device
-PART=xc6slx16-ftg256-2
+# Target device (ZRtech / WXEDA Spartan-6 board)
+PART=xc6slx9-tqg144-2
 
 # Check if Xilinx ISE is in PATH
 if ! command -v xst >/dev/null 2>&1; then
-    echo "Error: Xilinx ISE (xst) not found in PATH."
-    echo "Please source settings64.sh first (e.g., source /opt/Xilinx/14.7/ISE_DS/settings64.sh)"
-    exit 1
+    ISE_ROOTFS="$HOME/.cache/docker-xilinx-ise/rootfs"
+    if [ -f "/opt/Xilinx/14.7/ISE_DS/settings64.sh" ]; then
+        source /opt/Xilinx/14.7/ISE_DS/settings64.sh
+    elif [ -d "$ISE_ROOTFS/opt/Xilinx/14.7/ISE_DS" ] && command -v bwrap >/dev/null 2>&1; then
+        echo "Running Xilinx ISE 14.7 inside container ($ISE_ROOTFS)..."
+        mkdir -p "$HOME/.Xilinx" && touch "$HOME/.Xilinx/Xilinx.lic"
+        exec bwrap \
+            --bind "$ISE_ROOTFS" / \
+            --dev /dev \
+            --proc /proc \
+            --tmpfs /tmp \
+            --bind "$HOME" "$HOME" \
+            --chdir "$(pwd)" \
+            /bin/bash -c "source /opt/Xilinx/14.7/ISE_DS/settings64.sh && ./build.sh"
+    elif command -v docker >/dev/null 2>&1; then
+        echo "Running Xilinx ISE 14.7 via Docker..."
+        exec docker run --rm -v "$(pwd):/workspace" -w /workspace drtrigon/papilio-environment-ise \
+            /bin/bash -c "source /opt/Xilinx/14.7/ISE_DS/settings64.sh && ./build.sh"
+    else
+        echo "Error: Xilinx ISE (xst) not found in PATH."
+        echo "Please source settings64.sh first (e.g., source /opt/Xilinx/14.7/ISE_DS/settings64.sh)"
+        exit 1
+    fi
 fi
 
 echo "=== 1. Synthesis (xst) ==="

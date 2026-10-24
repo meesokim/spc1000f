@@ -106,16 +106,16 @@ module clocks
     .DIVCLK_DIVIDE          (1),
     .CLKFBOUT_MULT          (10),
     .CLKFBOUT_PHASE         (0.000),
-    .CLKOUT0_DIVIDE         (20),
+    .CLKOUT0_DIVIDE         (19),
     .CLKOUT0_PHASE          (0.000),
     .CLKOUT0_DUTY_CYCLE     (0.500),
-    .CLKOUT1_DIVIDE         (125),
+    .CLKOUT1_DIVIDE         (120),
     .CLKOUT1_PHASE          (0.000),
     .CLKOUT1_DUTY_CYCLE     (0.500),
-    .CLKOUT2_DIVIDE         (42),
+    .CLKOUT2_DIVIDE         (40),
     .CLKOUT2_PHASE          (0.000),
     .CLKOUT2_DUTY_CYCLE     (0.500),
-    .CLKIN_PERIOD           (20.000),
+    .CLKIN_PERIOD           (20.833),
     .REF_JITTER             (0.010))
   pll_base_inst
     // Output clocks
