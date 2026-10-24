@@ -1,0 +1,55 @@
+##################################################################################
+## ALINX AX309 Pin Constraints for SPC-1000F
+## Target FPGA: Spartan-6 XC6SLX16-FTG256 (or XC6SLX9-FTG256)
+##################################################################################
+
+## 50MHz System Clock
+NET "clk_50" LOC = T8 | TNM_NET = "sys_clk_pin" | IOSTANDARD = "LVCMOS33";
+TIMESPEC "TS_sys_clk_pin" = PERIOD "sys_clk_pin" 50 MHz HIGH 50.00%;
+
+## Reset Button (Active Low, RST key / S1)
+NET "reset_n" LOC = L3 | IOSTANDARD = "LVCMOS33";
+
+## VGA Output (RGB565 + HS/VS)
+NET "vga_r<4>"   LOC = M13 | IOSTANDARD = "LVCMOS33";
+NET "vga_r<3>"   LOC = N14 | IOSTANDARD = "LVCMOS33";
+NET "vga_r<2>"   LOC = L12 | IOSTANDARD = "LVCMOS33";
+NET "vga_r<1>"   LOC = M12 | IOSTANDARD = "LVCMOS33";
+NET "vga_r<0>"   LOC = M11 | IOSTANDARD = "LVCMOS33";
+
+NET "vga_g<5>"   LOC = P11 | IOSTANDARD = "LVCMOS33";
+NET "vga_g<4>"   LOC = M10 | IOSTANDARD = "LVCMOS33";
+NET "vga_g<3>"   LOC = L10 | IOSTANDARD = "LVCMOS33";
+NET "vga_g<2>"   LOC = P9  | IOSTANDARD = "LVCMOS33";
+NET "vga_g<1>"   LOC = N9  | IOSTANDARD = "LVCMOS33";
+NET "vga_g<0>"   LOC = M9  | IOSTANDARD = "LVCMOS33";
+
+NET "vga_b<4>"   LOC = L7  | IOSTANDARD = "LVCMOS33";
+NET "vga_b<3>"   LOC = N8  | IOSTANDARD = "LVCMOS33";
+NET "vga_b<2>"   LOC = P8  | IOSTANDARD = "LVCMOS33";
+NET "vga_b<1>"   LOC = M7  | IOSTANDARD = "LVCMOS33";
+NET "vga_b<0>"   LOC = P7  | IOSTANDARD = "LVCMOS33";
+
+NET "vga_hs"     LOC = M14 | IOSTANDARD = "LVCMOS33";
+NET "vga_vs"     LOC = L13 | IOSTANDARD = "LVCMOS33";
+
+## 6-Digit 7-Segment Display
+NET "seg_data<0>" LOC = C7 | IOSTANDARD = "LVCMOS33";
+NET "seg_data<1>" LOC = E6 | IOSTANDARD = "LVCMOS33";
+NET "seg_data<2>" LOC = C5 | IOSTANDARD = "LVCMOS33";
+NET "seg_data<3>" LOC = F7 | IOSTANDARD = "LVCMOS33";
+NET "seg_data<4>" LOC = D6 | IOSTANDARD = "LVCMOS33";
+NET "seg_data<5>" LOC = E7 | IOSTANDARD = "LVCMOS33";
+NET "seg_data<6>" LOC = D5 | IOSTANDARD = "LVCMOS33";
+NET "seg_data<7>" LOC = C6 | IOSTANDARD = "LVCMOS33";
+
+NET "scan_sig<0>" LOC = D8  | IOSTANDARD = "LVCMOS33";
+NET "scan_sig<1>" LOC = E8  | IOSTANDARD = "LVCMOS33";
+NET "scan_sig<2>" LOC = F9  | IOSTANDARD = "LVCMOS33";
+NET "scan_sig<3>" LOC = F10 | IOSTANDARD = "LVCMOS33";
+NET "scan_sig<4>" LOC = E10 | IOSTANDARD = "LVCMOS33";
+NET "scan_sig<5>" LOC = D9  | IOSTANDARD = "LVCMOS33";
+
+## USB HID Host (J3 GPIO Header: PIN3 = A4, PIN4 = B5)
+NET "usbdp"      LOC = A4  | IOSTANDARD = "LVCMOS33" | PULLUP;
+NET "usbdm"      LOC = B5  | IOSTANDARD = "LVCMOS33";
